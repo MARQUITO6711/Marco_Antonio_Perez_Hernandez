@@ -1,0 +1,46 @@
+echo "# Marco_Antonio_Perez_Hernandez" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/MARQUITO6711/Marco_Antonio_Perez_Hernandez.git
+git push -u origin main
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd (12,11,5,4,3,2);
+
+float Vout = 0.0;
+float SENSOR = 0.0;
+float Fuerza = 0.0;
+float lectura = 0.0;
+float Peso = 0.0;
+
+void setup() 
+{  
+  lcd.begin(16,2);
+  pinMode (A0,INPUT);
+  Serial.begin(9600);
+
+}
+
+void loop() 
+{
+  lectura = analogRead(A0);
+  Vout = (lectura*5)/1023;
+  SENSOR = 10000*((5/Vout)-1);
+
+  lcd.setCursor(0,0);
+  lcd.print("Fuerza:");
+  Fuerza = pow((SENSOR/6086.9),-1.4123);
+  lcd.print(Fuerza);
+  lcd.print(" N");
+
+  lcd.setCursor(0,1);
+  lcd.print("Peso:");
+  Peso = Fuerza * 101.97;
+  lcd.print(Peso);
+  lcd.print(" g");
+  delay(2000);
+  lcd.clear();
+
+}
