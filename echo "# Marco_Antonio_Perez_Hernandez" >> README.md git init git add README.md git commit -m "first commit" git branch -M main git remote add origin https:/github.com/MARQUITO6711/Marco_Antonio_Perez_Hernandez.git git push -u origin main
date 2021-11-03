@@ -31,7 +31,7 @@ void loop()
 
   lcd.setCursor(0,0);
   lcd.print("Fuerza:");
-  Fuerza = pow((SENSOR/6086.9),-1.4123);
+  Fuerza = pow((SENSOR/6821.1),-1.14836);
   lcd.print(Fuerza);
   lcd.print(" N");
 
